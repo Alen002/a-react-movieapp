@@ -53,17 +53,19 @@ const App = () => {
   // HANDLEONSUBMIT
   const handleOnSubmit = (e) => {
     e.preventDefault(); // avoid submitting the form and refreshing the page
-
-    const test = async () => {
-    /* const response = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${process.env.REACT_APP_API_KEY}&page=1`); */
-    const response = await fetch(`https://api.themoviedb.org/3/search/movie?&api_key=${process.env.REACT_APP_API_KEY}&query=` + searchTerm);
-    const moviesResponse = await response.json();
-    console.log(moviesResponse);
-    /* setMovies(moviesResponse.results); */
-    setMovies(moviesResponse.results);
+    if(searchTerm) {
+      const searchAPI = async () => {
+        /* const response = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${process.env.REACT_APP_API_KEY}&page=1`); */
+        const response = await fetch(`https://api.themoviedb.org/3/search/movie?&api_key=${process.env.REACT_APP_API_KEY}&query=` + searchTerm);
+        const moviesResponse = await response.json();
+        console.log(moviesResponse);
+        /* setMovies(moviesResponse.results); */
+        setMovies(moviesResponse.results);
+      }
+      searchAPI();
+    } else {
+      asyncFunction();
     }
-    test();
-    
   }
 
   // HANDLEONCHANGE
