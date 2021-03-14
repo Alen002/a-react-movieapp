@@ -56,11 +56,12 @@ code {
   bottom: 0;
   left: 0;
   right: 0;
-  transform: translateX(100%); /* push it down */
+  transform: translateY(100%); /* Y push it down vertically, X push it horizontally */
+  transition: transform 0.4s ease-in-out;
 }
 
 /* Show overview when we hover over a movie */
 .movie:hover .movie-over {
-  transform: translateX(0%); /* push it back */
+  transform: translateY(0%); /* push it back */
 }
 
