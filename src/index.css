@@ -25,6 +25,7 @@ code {
 .movie-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center; /* center all movie elements within the container */
 }
 
 .movie {
