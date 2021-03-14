@@ -28,6 +28,7 @@ const users = [
 // START OF APP COMPONENT
 const App = () => {
   const [movies, setMovies] = useState([]); // by default we will have an empty array which will be later filled with the fetched API data
+  const [searchTerm, setSearchTerm] = useState('');
 
   // FETCHING WITH .THEN
   const fetching = () => {
@@ -49,6 +50,28 @@ const App = () => {
     setMovies(moviesResponse.results);
   }
 
+  // HANDLEONSUBMIT
+  const handleOnSubmit = (e) => {
+    e.preventDefault(); // avoid submitting the form and refreshing the page
+
+    const test = async () => {
+    /* const response = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${process.env.REACT_APP_API_KEY}&page=1`); */
+    const response = await fetch(`https://api.themoviedb.org/3/search/movie?&api_key=${process.env.REACT_APP_API_KEY}&query=` + searchTerm);
+    const moviesResponse = await response.json();
+    console.log(moviesResponse);
+    /* setMovies(moviesResponse.results); */
+    setMovies(moviesResponse.results);
+    }
+    test();
+    
+  }
+
+  // HANDLEONCHANGE
+  const handleOnChange = (e) => {
+    setSearchTerm(e.target.value);
+  }
+
+
   // USEEFFECT
   useEffect(() => asyncFunction(), [])  
 
@@ -57,7 +80,15 @@ const App = () => {
     <> 
       <h1>MovieApp</h1> 
       <header>
-        <input className='search' type="text" placeholder='Search Movie'/>
+        <form onSubmit={handleOnSubmit}>
+          <input 
+            className='search' 
+            type="text" 
+            placeholder='Search Movie'
+            value={searchTerm} // we need a state for the searchTerm in oder to rerender the page after the search input
+            onChange={handleOnChange} // whenever we enter something the event is immediately fired
+          />
+        </form>  
       </header>
       <div className='movie-container'> 
         {movies.map(movie =>  // you can only loop through an array with map

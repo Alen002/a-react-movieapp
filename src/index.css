@@ -76,4 +76,13 @@ code {
 /* Start of search header */
 header {
   padding: 1rem;
+  display: flex;
+  justify-content: flex-end; 
+}
+
+.search {
+  font-family: inherit;
+  font-size: 1.2rem;
+  border-radius: 2px;
+  border-style: none;
 }
