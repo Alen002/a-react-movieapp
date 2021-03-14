@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Movie from './components/Movie';
 import uuid from 'uuid';
-import env from 'dotenv';
+
 
 const users = [
 {
@@ -25,25 +25,11 @@ const users = [
 
 ];
 
-
-
-
-
+// START OF APP COMPONENT
 const App = () => {
-/*   const movies =['1', '2', '3']; */
-/*   useEffect(() => {console.log('USEEFFECT FIRED')}, []);  */
   const [movies, setMovies] = useState([]); // by default we will have an empty array which will be later filled with the fetched API data
 
-  
-  /*   
-  const fetching = async () => {
-    let array = [];
-    const response = await fetch('https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1');
-    const moviesResponse = await response.json();
-    console.log(moviesResponse);
-  } */
-
-
+  // FETCHING WITH .THEN
   const fetching = () => {
     fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${process.env.REACT_APP_API_KEY}&page=1`)
       .then(
@@ -55,7 +41,7 @@ const App = () => {
           setMovies(data.results)
       });
   };
- 
+  // ASYNC 
   const asyncFunction = async () => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${process.env.REACT_APP_API_KEY}&page=1`);
     const moviesResponse = await response.json();
@@ -63,21 +49,20 @@ const App = () => {
     setMovies(moviesResponse.results);
   }
 
+  // USEEFFECT
   useEffect(() => asyncFunction(), [])  
 
   return (
-    <div>
+    <>
       <h1>MovieApp</h1> 
-      {movies.map(e => {
-        return(
-          <>
-            <p>{e.original_title}</p>
-          </>
-        )
-      })}
-     
-    </div>
+      <div className='movie-container'> 
+        {movies.map(movie =>  // you can only loop through an array with map
+        <Movie key={movie.id} {...movie} />  // ... is the spread operator, movie values are spread it we get all the props separately
+        )}
+      </div>
+    </>
   );
 }
+// END OF APP COMPONENT
 
 export default App;
