@@ -9,6 +9,13 @@ body {
   color: white;
 }
 
+/* The root class is in index.html */
+.root {
+  display: flex;
+  flex-direction: column;
+} 
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -58,6 +65,7 @@ code {
   right: 0;
   transform: translateY(100%); /* Y push it down vertically, X push it horizontally */
   transition: transform 0.4s ease-in-out;
+  max-height: 100%; /* To avoid overflow of text */
 }
 
 /* Show overview when we hover over a movie */
@@ -65,3 +73,7 @@ code {
   transform: translateY(0%); /* push it back */
 }
 
+/* Start of search header */
+header {
+  padding: 1rem;
+}

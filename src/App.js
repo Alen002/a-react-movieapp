@@ -53,14 +53,19 @@ const App = () => {
   useEffect(() => asyncFunction(), [])  
 
   return (
-    <>
+    // <> react fragments
+    <> 
       <h1>MovieApp</h1> 
+      <header>
+        <input className='search' type="text" placeholder='Search Movie'/>
+      </header>
       <div className='movie-container'> 
         {movies.map(movie =>  // you can only loop through an array with map
         <Movie key={movie.id} {...movie} />  // ... is the spread operator, movie values are spread it we get all the props separately
         )}
       </div>
-    </>
+    </> 
+    // </> end of react fragments
   );
 }
 // END OF APP COMPONENT
